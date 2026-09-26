@@ -37,6 +37,24 @@ python main.py --name Sara --date 1995-04-12 --time 08:30 \
 python main.py --name Sara --date 1995-04-12 --time 08:30 --city "Tanta, Egypt" --dry-run
 ```
 
+### Testing without a paid API key
+
+The OpenAI client works with any OpenAI-compatible endpoint, so you can try the demo on a free tier by setting these in `.env`:
+
+```bash
+# Google Gemini (free key from aistudio.google.com)
+OPENAI_API_KEY=your-gemini-key
+OPENAI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
+OPENAI_MODEL=gemini-2.5-flash
+
+# or Groq (free key from console.groq.com)
+OPENAI_API_KEY=your-groq-key
+OPENAI_BASE_URL=https://api.groq.com/openai/v1
+OPENAI_MODEL=llama-3.3-70b-versatile
+```
+
+The chart and transit calculation runs fully offline. `--dry-run` shows everything that is sent to the model.
+
 ## Tests
 
 ```bash
