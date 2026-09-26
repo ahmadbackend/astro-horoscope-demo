@@ -11,6 +11,43 @@ today's sky ──► transit-to-natal aspects (tightest first)
          structured prompt ──► OpenAI / Anthropic ──► horoscope text
 ```
 
+## Sample run
+
+Real output for a test user born 12 April 1995, 08:30, in Tanta, Egypt, with the horoscope generated for 26 September 2026:
+
+```
+Reader: Sara
+Date: Saturday, 26 September 2026
+Natal chart: Sun in Aries, Moon in Virgo, rising sign Gemini.
+
+Today's sky:
+- Sun 3° Libra
+- Moon 26° Pisces
+- Mercury 24° Libra
+- Venus 8° Scorpio
+- Mars 29° Cancer
+- Jupiter 19° Leo
+- Saturn 12° Aries (retrograde)
+- Uranus 6° Gemini (retrograde)
+- Neptune 3° Aries (retrograde)
+- Pluto 3° Aquarius (retrograde)
+
+Most exact transits to the natal chart today (tightest first):
+- Transiting Jupiter 19° Leo trine natal Mercury 19° Aries (orb 0.7°, in your natal house 3)
+- Transiting Moon 26° Pisces sextile natal Neptune 25° Capricorn (orb 0.9°, in your natal house 10)
+- Transiting Mars 29° Cancer trine natal Pluto 0° Sagittarius (retrograde) (orb 1.3°, in your natal house 2)
+- Transiting Mars 29° Cancer opposition natal Uranus 0° Aquarius (orb 1.4°, in your natal house 2)
+- Transiting Mercury 24° Libra square natal Neptune 25° Capricorn (orb 1.4°, in your natal house 5)
+```
+
+Generated horoscope:
+
+> Dear Sara, today brings a lively mix of energies, encouraging both connection and deep personal reflection.
+>
+> You'll find your mind is especially sharp and optimistic, making this a wonderful day for conversations and sharing your ideas. There's a natural flow to expressing yourself, thanks to a harmonious *trine* aspect, which signifies ease and opportunity, allowing you to connect easily with others and perhaps discover new avenues for learning. Your intuition also feels heightened, offering inspiring insights, especially regarding your long-term goals or career direction. Trust those quiet nudges that guide you toward what truly resonates with your purpose.
+
+The Jupiter–Mercury trine (orb 0.7°) becomes "your mind is especially sharp and optimistic… conversations and sharing your ideas", and the Moon–Neptune sextile in the 10th house becomes intuition about "career direction". Every line traces back to a real placement in her chart.
+
 ## What it does
 
 - **Natal chart**: positions of the Sun through Pluto, retrograde flags, Ascendant and Placidus house cusps (falls back to whole-sign houses at polar latitudes). Uses the built-in Moshier ephemeris, so no data files are needed.
@@ -46,6 +83,7 @@ The OpenAI client works with any OpenAI-compatible endpoint, so you can try the 
 OPENAI_API_KEY=your-gemini-key
 OPENAI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
 OPENAI_MODEL=gemini-2.5-flash
+LLM_REASONING_EFFORT=none
 
 # or Groq (free key from console.groq.com)
 OPENAI_API_KEY=your-groq-key

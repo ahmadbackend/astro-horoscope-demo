@@ -19,7 +19,13 @@ def generate(system_prompt: str, user_prompt: str, provider: str = "openai") -> 
     if provider == "openai":
         from openai import OpenAI
 
-        client = OpenAI()  # reads OPENAI_API_KEY
+        client = OpenAI()  # reads OPENAI_API_KEY and optional OPENAI_BASE_URL
+        extra = {}
+        # For thinking models behind an OpenAI-compatible endpoint (e.g. Gemini
+        # 2.5 Flash), LLM_REASONING_EFFORT=none turns hidden thinking off.
+        # Leave it unset for GPT-4o mini.
+        if os.getenv("LLM_REASONING_EFFORT"):
+            extra["reasoning_effort"] = os.getenv("LLM_REASONING_EFFORT")
         response = client.chat.completions.create(
             model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
             temperature=0.8,
@@ -28,6 +34,7 @@ def generate(system_prompt: str, user_prompt: str, provider: str = "openai") -> 
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
+            **extra,
         )
         choice = response.choices[0]
         _warn_if_truncated(choice.finish_reason)
